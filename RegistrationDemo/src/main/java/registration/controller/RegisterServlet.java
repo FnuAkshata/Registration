@@ -6,8 +6,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.RegisterBean;
+import jakarta.servlet.http.HttpSession;
 import registration.dao.RegisterDAO;
+import registration.model.RegisterBean;
+import registration.util.RegisterUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,18 +27,21 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String error = RegisterUtil.validateRequest(request);
+		
+		if(error == null) {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String userName = request.getParameter("userName");
+		String username = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String contact = request.getParameter("contact");
 		
 		RegisterBean registerBean = new RegisterBean();
-		registerBean.setLastName(firstName);
+		registerBean.setFirstName(firstName);
 		registerBean.setLastName(lastName);
-		registerBean.setLastName(userName);
-		registerBean.setLastName(password);
-		registerBean.setLastName(contact);
+		registerBean.setUserName(username);
+		registerBean.setPassword(password);
+		registerBean.setContact(contact);
 		
 		try {
 			registerDAO.registerUser(registerBean);
@@ -47,6 +52,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/registrationSuccess.jsp");
 		dispatcher.forward(request, response);
+	}
 	}
 
 

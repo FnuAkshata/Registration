@@ -18,15 +18,15 @@
     <tr>
 
   <td>Last Name</td>
-     <td><input type="text" name="lastName" /></td>
+     <td><input type="text" name="lastName"  /></td>
     </tr>
     <tr>
      <td>UserName</td>
-     <td><input type="text" name="username" /></td>
+     <td><input type="text" name="userName" required/></td>
     </tr>
     <tr>
      <td>Password</td>
-     <td><input type="password" name="password" /></td>
+     <td><input type="password" name="password" required /></td>
     </tr>
     <tr>
      <td>Contact No</td>
